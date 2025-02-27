@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Together Culture - Member Home</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Dashboard Content */
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            gap: 20px; /* Adds space between cards */
+        }
+
+        .dashboard-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .dashboard-card h2 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .dashboard-card p {
+            font-size: 1em;
+            color: #666;
+        }
+
+        .dashboard-card button {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .dashboard-card button:hover {
+            background-color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto; /* Ensures footer stays at the bottom */
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Together Culture</h1>
+        <p>Connecting Creativity and Community</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Dashboard</a>
+        <a href="#">Events</a>
+        <a href="#">Connections</a>
+        <a href="#">Profile</a>
+        <a href="#">Logout</a>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Secure Login Card -->
+        <div class="dashboard-card">
+            <h2>Secure Login</h2>
+            <p>Log into your password-protected members-only area to keep your data secure.</p>
+            <button>Login</button>
+        </div>
+
+        <!-- Book Digital Content Card -->
+        <div class="dashboard-card">
+            <h2>Book Digital Content</h2>
+            <p>Access the full series of learning opportunities by booking digital content modules.</p>
+            <button>Book Now</button>
+        </div>
+
+        <!-- Dashboard Overview Card -->
+        <div class="dashboard-card">
+            <h2>Dashboard Overview</h2>
+            <p>View your dashboard to see the benefits you are using and those you haven't used yet.</p>
+            <button>View Dashboard</button>
+        </div>
+
+        <!-- Interests and Intentions Card -->
+        <div class="dashboard-card">
+            <h2>Interests & Intentions</h2>
+            <p>Reflect on your journey within the community by viewing the interests and intentions you provided when you joined.</p>
+            <button>View Interests</button>
+        </div>
+
+        <!-- Event Suggestions Card -->
+        <div class="dashboard-card">
+            <h2>Event Suggestions</h2>
+            <p>Receive suggestions about events and activities based on your past experiences.</p>
+            <button>View Suggestions</button>
+        </div>
+
+        <!-- Digital Connections Board Card -->
+        <div class="dashboard-card">
+            <h2>Connections Board</h2>
+            <p>Access the digital connections board to see what people need and what they can offer in the skills library.</p>
+            <button>View Board</button>
+        </div>
+
+        <!-- Member Documents & Chat Card -->
+        <div class="dashboard-card">
+            <h2>Documents & Chat</h2>
+            <p>View member documents and chat with other members online to interact with the community more easily.</p>
+            <button>Access Chat</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms</a> | 
+        <a href="#">Help Center</a>
+    </footer>
+</body>
+</html>
