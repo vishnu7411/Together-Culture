@@ -148,3 +148,5 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "members",  # ✅ Ensure your app is listed
 ]
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"
