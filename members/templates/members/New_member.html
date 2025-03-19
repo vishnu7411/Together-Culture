@@ -33,11 +33,6 @@
             margin: 0;
         }
 
-        header p {
-            font-size: 1.2em;
-            margin: 5px 0 0;
-        }
-
         /* Navigation */
         nav {
             display: flex;
@@ -84,17 +79,13 @@
             margin-bottom: 5px;
         }
 
-        .signup-container input, .signup-container textarea {
+        .signup-container input, .signup-container textarea, .signup-container select {
             width: 100%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
-        }
-
-        .signup-container textarea {
-            height: 80px;
         }
 
         .signup-container button {
@@ -145,13 +136,11 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <h1>Together Culture</h1>
         <p>Connecting Creativity and Community</p>
     </header>
 
-    <!-- Navigation -->
     <nav>
         <a href="{% url 'home' %}">Home</a>
         <a href="#">Events</a>
@@ -160,54 +149,26 @@
         <a href="{% url 'register' %}">Login</a>
     </nav>
 
-    <!-- Signup Form -->
     <div class="signup-container">
         <h2>Sign Up</h2>
 
         <!-- Success Message -->
-        {% if success_message %}
-            <div class="success-message">{{ success_message }}</div>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="success-message">{{ message }}</div>
+                {% endfor %}
+            </div>
         {% endif %}
 
         <form method="post">
             {% csrf_token %}
-            <label for="first_name">First Name:</label>
-            <input type="text" name="first_name" required>
-
-            <label for="last_name">Last Name:</label>
-            <input type="text" name="last_name" required>
-
-            <label for="gender">Gender:</label>
-            <select name="gender" required>
-                <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" required>
-
-            <label for="membership_type">Membership Type:</label>
-            <select name="membership_type" required>
-                <option value="">Select</option>
-                <option value="Basic">Basic</option>
-                <option value="Premium">Premium</option>
-            </select>
-
-            <label for="interests">Interests:</label>
-            <textarea name="interests" placeholder="Enter your interests..."></textarea>
-
-            <label for="password">Password:</label>
-            <input type="password" name="password" required>
-
-            <label for="confirm_password">Confirm Password:</label>
-            <input type="password" name="confirm_password" required>
+            {{ form.as_p }}
 
             <button type="submit">Sign Up</button>
         </form>
     </div>
 
-    <!-- Footer -->
     <footer>
         <a href="#">Privacy Policy</a> | 
         <a href="#">Terms</a> | 
@@ -225,6 +186,5 @@
             }
         });
     </script>
-
 </body>
 </html>

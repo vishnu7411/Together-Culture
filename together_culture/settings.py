@@ -123,3 +123,28 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+INSTALLED_APPS = [
+    "django.contrib.messages",
+]
+
+INSTALLED_APPS = [
+    "django.contrib.messages",  # Ensure this line is present
+]
+MIDDLEWARE = [
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",  # ✅ Add this line before AuthenticationMiddleware
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
+]
+INSTALLED_APPS = [
+    "django.contrib.admin",  # ✅ Ensure this is listed
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "members",  # ✅ Ensure your app is listed
+]

@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import home, register  # ✅ Ensure both views are imported
+from .views import register, home
 
 urlpatterns = [
-    path("home/", home, name="home"),  # Home page
+    path("", home, name="home"),  # Home page
     path("register/", register, name="register"),  # Register page
 ]
