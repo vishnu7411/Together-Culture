@@ -41,7 +41,7 @@ def user_login(request):
 
     return render(request, "members/login.html")  # Ensure the login template exists
 
-def ongoing_events(request):
+def manage_events(request):
     """View to display all ongoing events"""
     events = OngoingEvent.objects.all()
     return render(request, 'members/ongoing_events.html', {'events': events})

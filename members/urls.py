@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, home, user_login,ongoing_events,add_ongoing_event  # ✅ Import user_login
+from .views import register, home, user_login,manage_events,add_ongoing_event  # ✅ Import user_login
 from .views import register, home, user_login  # ✅ Import user_login
 from .views import admin_login, admin_dashboard, admin_logout
 from .views import registered_members
@@ -10,7 +10,7 @@ urlpatterns = [
     path("", home, name="home"),  # Home page
     path("register/", register, name="register"),
     path("login/", user_login, name="login"),  # Login page
-    path('ongoing_events/', ongoing_events, name='ongoing_events'),
+    path('manage-events/', manage_events, name='manage_events'),
     path('add_ongoing_event/', add_ongoing_event, name='add_ongoing_event'),
     path("admin-login/", admin_login, name="admin_login"),
     path("admin-dashboard/", admin_dashboard, name="admin_dashboard"),
