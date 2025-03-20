@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import MemberForm
+from .models import OngoingEvent
+from .forms import MemberForm,OngoingEventForm
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 
@@ -23,9 +24,7 @@ def home(request):
     return render(request, "home.html")  # Ensure the correct path
 
 
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib import messages
 
 def user_login(request):
     if request.method == "POST":
@@ -40,6 +39,23 @@ def user_login(request):
         else:
             messages.error(request, "Invalid username or password!")
 
+    return render(request, "members/login.html")  # Ensure the login template exists
+
+def manage_events(request):
+    """View to display all ongoing events"""
+    events = OngoingEvent.objects.all()
+    return render(request, 'members/ongoing_events.html', {'events': events})
+
+def add_ongoing_event(request):
+    """View to add a new ongoing event"""
+    if request.method == 'POST':
+        form = OngoingEventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ongoing_events')
+    else:
+        form = OngoingEventForm()
+    return render(request, 'members/add_ongoing_event.html', {'form': form})
     return render(request, "login.html")  # Ensure the login template exists
 
 
@@ -70,10 +86,15 @@ def admin_logout(request):
     return redirect("admin_login")
 
 from django.shortcuts import render
-from .models import Member  # Assuming you have a Member model
+from .models import Member  # Ensure you have imported your Member model
+
+from django.shortcuts import render
+from .models import Member
 
 def registered_members(request):
-    members = Member.objects.all()  # Fetch all registered members
+    members = Member.objects.filter(is_approved=True).values(
+        "first_name", "last_name", "email", "membership_type", "gender"
+    )
     return render(request, "registered_members.html", {"members": members})
 
 
@@ -97,3 +118,32 @@ def reject_member(request, member_id):
     member = get_object_or_404(Member, id=member_id)
     member.delete()  # Remove from database
     return redirect("pending_members")  # Redirect back to pending list
+
+from django.shortcuts import render, redirect
+from .models import Event
+
+def add_event(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        event_type = request.POST.get('event_type')
+        location = request.POST.get('location')
+        capacity = request.POST.get('capacity')
+        event_date = request.POST.get('event_date')
+        event_time = request.POST.get('event_time')
+
+        # Save to database
+        Event.objects.create(
+            name=name,
+            event_type=event_type,
+            location=location,
+            capacity=capacity,
+            event_date=event_date,
+            event_time=event_time
+        )
+        return redirect('manage_events')  # Redirect to events page
+
+    return render(request, 'add_event.html')
+
+def manage_events(request):
+    events = Event.objects.all()  # Fetch all events
+    return render(request, 'manage_events.html', {'events': events})

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Member
+from .models import Member,OngoingEvent
 
 class MemberForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -16,3 +16,12 @@ class MemberForm(forms.ModelForm):
 
         if password != confirm_password:
             self.add_error('confirm_password', "Passwords do not match")
+
+class OngoingEventForm(forms.ModelForm):
+    class Meta:
+        model = OngoingEvent
+        fields = ['title', 'location', 'capacity', 'description', 'start_date', 'end_date']
+        widgets = {
+            'start_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'end_date': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+        }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Event</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Together Culture</a>
+        <a class="btn btn-secondary" href="{% url 'manage_events' %}">Back to Events</a>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Add New Event</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="event_type" class="form-label">Event Type</label>
+                <input type="text" class="form-control" id="event_type" name="event_type" required>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+            <div class="mb-3">
+                <label for="capacity" class="form-label">Capacity</label>
+                <input type="number" class="form-control" id="capacity" name="capacity" required>
+            </div>
+            <div class="mb-3">
+                <label for="event_date" class="form-label">Event Date</label>
+                <input type="date" class="form-control" id="event_date" name="event_date" required>
+            </div>
+            <div class="mb-3">
+                <label for="event_time" class="form-label">Event Time</label>
+                <input type="time" class="form-control" id="event_time" name="event_time" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Event</button>
+        </form>
+    </div>
+
+</body>
+</html>
