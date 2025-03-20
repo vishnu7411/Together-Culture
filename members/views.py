@@ -18,10 +18,10 @@ def register(request):
     else:
         form = MemberForm()
 
-    return render(request, "members/new_member.html", {"form": form, "success_message": success_message})
+    return render(request, "new_member.html", {"form": form, "success_message": success_message})
 
 def home(request):
-    return render(request, "members/home.html")  # Ensure the correct path
+    return render(request, "home.html")  # Ensure the correct path
 
 
 from django.contrib.auth import authenticate, login
@@ -56,3 +56,60 @@ def add_ongoing_event(request):
     else:
         form = OngoingEventForm()
     return render(request, 'members/add_ongoing_event.html', {'form': form})
+    return render(request, "login.html")  # Ensure the login template exists
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+
+def admin_login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_staff:  # Only allow admins
+            login(request, user)
+            return redirect("admin_dashboard")  # Redirects to the Admin Dashboard
+        else:
+            return render(request, "admin_login.html", {"error_message": "Invalid credentials or not an admin!"})
+
+    return render(request, "admin_login.html")
+
+@login_required
+def admin_dashboard(request):
+    return render(request, "admin_dashboard.html")
+
+def admin_logout(request):
+    logout(request)
+    return redirect("admin_login")
+
+from django.shortcuts import render
+from .models import Member  # Assuming you have a Member model
+
+def registered_members(request):
+    members = Member.objects.all()  # Fetch all registered members
+    return render(request, "registered_members.html", {"members": members})
+
+
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Member  # Import Member model
+
+def pending_members(request):
+    """View to display all pending members"""
+    members = Member.objects.filter(is_approved=False)  # Get only unapproved members
+    return render(request, "pending_members.html", {"members": members})
+
+def approve_member(request, member_id):
+    """Approve a member and move them to the registered members list"""
+    member = get_object_or_404(Member, id=member_id)
+    member.is_approved = True  # Approve the member
+    member.save()
+    return redirect("pending_members")  # Redirect back to pending list
+
+def reject_member(request, member_id):
+    """Reject a member and delete from the database"""
+    member = get_object_or_404(Member, id=member_id)
+    member.delete()  # Remove from database
+    return redirect("pending_members")  # Redirect back to pending list

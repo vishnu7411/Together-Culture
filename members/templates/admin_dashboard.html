@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Together Culture</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            font-size: 3em; /* Bigger Heading */
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 450px;
+            text-align: center;
+        }
+
+        .dashboard-container h2 {
+            font-size: 2em; /* Bigger Welcome Text */
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container .btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .dashboard-container .btn:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Big Heading -->
+    <div class="header">TOGETHER CULTURE</div>
+
+    <!-- Admin Dashboard -->
+    <div class="dashboard-container">
+        <h2>Welcome, Admin</h2>
+
+        <a href="{% url 'registered_members' %}" class="btn">View Registered Members</a>
+        <a href="{% url 'pending_members' %}" class="btn">Approve Pending Members</a>
+        <a href="{% url 'manage_events' %}" class="btn">Manage Events</a>
+        <a href="{% url 'admin_logout' %}" class="btn" style="background-color: gray;">Logout</a>
+    </div>
+
+</body>
+</html>
