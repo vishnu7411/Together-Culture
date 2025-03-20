@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import MemberForm
+from .models import OngoingEvent
+from .forms import MemberForm,OngoingEventForm
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
 
@@ -23,9 +24,7 @@ def home(request):
     return render(request, "members/home.html")  # Ensure the correct path
 
 
-from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib import messages
 
 def user_login(request):
     if request.method == "POST":
@@ -41,3 +40,19 @@ def user_login(request):
             messages.error(request, "Invalid username or password!")
 
     return render(request, "members/login.html")  # Ensure the login template exists
+
+def ongoing_events(request):
+    """View to display all ongoing events"""
+    events = OngoingEvent.objects.all()
+    return render(request, 'members/ongoing_events.html', {'events': events})
+
+def add_ongoing_event(request):
+    """View to add a new ongoing event"""
+    if request.method == 'POST':
+        form = OngoingEventForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ongoing_events')
+    else:
+        form = OngoingEventForm()
+    return render(request, 'members/add_ongoing_event.html', {'form': form})

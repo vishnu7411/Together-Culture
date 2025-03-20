@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Member(models.Model):
     GENDER_CHOICES = [
@@ -21,3 +22,15 @@ class Member(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+
+class OngoingEvent(models.Model):
+    title = models.CharField(max_length=200)
+    location = models.CharField(max_length=200)
+    capacity = models.PositiveIntegerField()
+    description = models.TextField()
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+
+    def __str__(self):
+        return self.title
