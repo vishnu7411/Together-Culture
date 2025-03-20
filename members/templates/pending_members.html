@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pending Member Approval</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        table { width: 80%; margin: 20px auto; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 10px; }
+        th { background-color: black; color: white; }
+        .approve { background-color: green; color: white; padding: 5px 10px; border: none; cursor: pointer; }
+        .reject { background-color: red; color: white; padding: 5px 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Pending Member Approval</h1>
+
+    <table>
+        <tr>
+            <th>Member Name</th>
+            <th>Email</th>
+            <th>Membership Type</th>
+            <th>Actions</th>
+        </tr>
+        {% for member in members %}
+        <tr>
+            <td>{{ member.name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{{ member.membership_type }}</td>
+            <td>
+                <a href="{% url 'approve_member' member.id %}"><button class="approve">Approve</button></a>
+                <a href="{% url 'reject_member' member.id %}"><button class="reject">Reject</button></a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No pending members.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
