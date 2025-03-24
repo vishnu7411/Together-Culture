@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Together Culture</title>
     <style>
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -15,77 +23,131 @@
             min-height: 100vh;
         }
 
+        /* Login Container */
         .login-container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            color: #333;
         }
 
-        h2 {
-            font-size: 1.8em;
+        .login-container h2 {
+            font-size: 2rem;
+            color: #1e3c72;
             margin-bottom: 20px;
         }
 
-        input {
-            width: 90%;
-            padding: 10px;
+        .login-container input {
+            width: 100%;
+            padding: 12px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1em;
+            outline: none;
         }
 
         .login-btn {
             width: 100%;
-            padding: 10px;
-            background-color: #333;
-            color: #fff;
+            padding: 12px;
+            background-color: #ffcc00;
+            color: black;
             border: none;
             border-radius: 5px;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            font-weight: bold;
             cursor: pointer;
-            margin-top: 10px;
+            transition: 0.3s ease-in-out;
         }
 
         .login-btn:hover {
-            background-color: #555;
+            background-color: #e6b800;
         }
 
+        /* Error and Success Messages */
         .error-message {
             color: red;
+            background: #ffdddd;
+            padding: 10px;
+            border-radius: 5px;
             margin-bottom: 15px;
         }
 
         .success-message {
             color: green;
+            background: #ddffdd;
+            padding: 10px;
+            border-radius: 5px;
             margin-bottom: 15px;
         }
 
+        /* Forgot Password */
         .forgot-password {
             display: block;
-            margin-top: 10px;
+            margin-top: 15px;
             color: #007bff;
             text-decoration: none;
+            font-weight: bold;
         }
 
         .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        /* Back to Home Button */
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: white;
+            font-size: 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+            color: #ffcc00;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
+    <!-- Login Box -->
     <div class="login-container">
         <h2>Welcome Back!</h2>
 
-        <!-- Show success or error messages -->
+        <!-- Error or Success Messages -->
         {% if messages %}
             {% for message in messages %}
-                <p class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">{{ message }}</p>
+                <p class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+                    {{ message }}
+                </p>
             {% endfor %}
         {% endif %}
 
@@ -96,7 +158,15 @@
             <button type="submit" class="login-btn">Login</button>
         </form>
 
-        <a href="#" class="forgot-password">Forgot Password?</a>
+        <a href="{% url 'password_reset' %}" class="forgot-password">Forgot Password?</a>
+        <a href="{% url 'home' %}" class="back-btn">← Back to Home</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Help Center</a>
     </div>
 
 </body>

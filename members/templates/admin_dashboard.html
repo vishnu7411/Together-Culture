@@ -5,76 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Together Culture</title>
     <style>
-        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .navbar a {
+            color: #ffcc00;
+            text-decoration: none;
+            padding: 10px 20px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            padding: 30px;
         }
-
-        /* Header */
-        .header {
-            text-align: center;
-            font-size: 3em; /* Bigger Heading */
-            font-weight: bold;
+        .container h2 {
+            font-size: 2.5em;
             color: #333;
             margin-bottom: 20px;
         }
-
-        /* Dashboard Container */
-        .dashboard-container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 450px;
-            text-align: center;
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-
-        .dashboard-container h2 {
-            font-size: 2em; /* Bigger Welcome Text */
-            margin-bottom: 20px;
-        }
-
-        .dashboard-container .btn {
-            width: 100%;
-            padding: 15px;
+        .btn {
+            display: block;
             background-color: #333;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            cursor: pointer;
-            margin-top: 10px;
-            text-decoration: none;
-            display: inline-block;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            width: 250px;
             text-align: center;
+            font-size: 1.2em;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s ease;
         }
-
-        .dashboard-container .btn:hover {
-            background-color: #555;
+        .btn:hover {
+            background-color: #ffcc00;
+            color: #333;
+        }
+        .logout-btn {
+            background-color: #d9534f;
+        }
+        .logout-btn:hover {
+            background-color: #c9302c;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
         }
     </style>
 </head>
 <body>
 
-    <!-- Big Heading -->
-    <div class="header">TOGETHER CULTURE</div>
+    <!-- Navbar -->
+    <div class="navbar">
+        TOGETHER CULTURE
+    </div>
 
-    <!-- Admin Dashboard -->
-    <div class="dashboard-container">
+    <!-- Container -->
+    <div class="container">
         <h2>Welcome, Admin</h2>
 
-        <a href="{% url 'registered_members' %}" class="btn">View Registered Members</a>
-        <a href="{% url 'pending_members' %}" class="btn">Approve Pending Members</a>
-        <a href="{% url 'manage_events' %}" class="btn">Manage Events</a>
-        <a href="{% url 'admin_logout' %}" class="btn" style="background-color: gray;">Logout</a>
+        <div class="button-container">
+            <a href="{% url 'registered_members' %}" class="btn">View Registered Members</a>
+            <a href="{% url 'pending_members' %}" class="btn">Approve Pending Members</a>
+            <a href="{% url 'manage_events' %}" class="btn">Manage Events</a>
+            <a href="{% url 'admin_logout' %}" class="btn logout-btn">Logout</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Together Culture | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
     </div>
 
 </body>

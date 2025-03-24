@@ -6,39 +6,47 @@
     <title>Admin Login - Together Culture</title>
     <style>
         /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
         }
 
         /* Header */
         .header {
-            text-align: center;
-            font-size: 3em;  /* Increased font size */
+            font-size: 2.8em;
             font-weight: bold;
-            color: #333;
+            text-align: center;
+            color: #ffcc00;
             margin-bottom: 20px;
         }
 
         /* Login Container */
         .login-container {
-            background-color: #fff;
+            background-color: white;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
+            color: #333;
         }
 
         .login-container h2 {
-            font-size: 2em;  /* Bigger Admin Login text */
+            font-size: 2rem;
+            color: #1e3c72;
             margin-bottom: 20px;
         }
 
@@ -54,34 +62,104 @@
         .login-container button {
             width: 100%;
             padding: 12px;
-            background-color: #333;
-            color: #fff;
+            background-color: #ffcc00;
+            color: black;
             border: none;
             border-radius: 5px;
             font-size: 1.2em;
+            font-weight: bold;
             cursor: pointer;
+            transition: 0.3s ease-in-out;
         }
 
         .login-container button:hover {
-            background-color: #555;
+            background-color: #e6b800;
         }
 
+        /* Error Message */
+        .error-container {
+            margin-bottom: 15px;
+        }
+
+        .error-message {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Back to Home Button */
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: white;
+            font-size: 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+            color: #ffcc00;
+        }
+
+        /* Footer - Fixed at bottom */
+        .footer {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Big Heading -->
+    <!-- Header -->
     <div class="header">TOGETHER CULTURE</div>
 
     <!-- Admin Login Box -->
     <div class="login-container">
         <h2>Admin Login</h2>
+
+        <!-- Error Messages -->
+        {% if messages %}
+            <div class="error-container">
+                {% for message in messages %}
+                    <div class="error-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <form method="post">
             {% csrf_token %}
             <input type="text" name="username" placeholder="Admin Username" required>
             <input type="password" name="password" placeholder="Password" required>
             <button type="submit">Login</button>
         </form>
+        <a href="{% url 'home' %}" class="back-btn">← Back to Home</a>
+    </div>
+
+    <!-- Footer - Fixed at bottom -->
+    <div class="footer">
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Help Center</a>
     </div>
 
 </body>

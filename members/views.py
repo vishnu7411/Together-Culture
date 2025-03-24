@@ -147,3 +147,56 @@ def add_event(request):
 def manage_events(request):
     events = Event.objects.all()  # Fetch all events
     return render(request, 'manage_events.html', {'events': events})
+
+from django.shortcuts import render
+from .models import Event  # Assuming Event model exists
+
+def events_page(request):
+    events = Event.objects.all()  # Fetch all events from the database
+    return render(request, 'events.html', {'events': events})
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+
+def admin_login(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        # Authenticate user
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None and user.is_staff:  # Ensure it's an admin
+            login(request, user)
+            return redirect("admin_dashboard")  # Redirect to the admin dashboard
+        else:
+            messages.error(request, "Wrong username or password.")  # Error message
+
+    return render(request, "admin_login.html")
+
+
+from django.core.mail import send_mail
+from django.contrib.auth.forms import PasswordResetForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+
+def password_reset_request(request):
+    if request.method == "POST":
+        form = PasswordResetForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data["email"]
+            send_mail(
+                'Password Reset Request',
+                'Click the link below to reset your password.',
+                'your-email@gmail.com',  # Sender's email
+                [email],  # Recipient's email
+                fail_silently=False
+            )
+            messages.success(request, "Password reset email sent successfully!")
+            return redirect('password-reset-done')
+        else:
+            messages.error(request, "Invalid email address!")
+    else:
+        form = PasswordResetForm()
+    return render(request, 'password_reset.html', {'form': form})
