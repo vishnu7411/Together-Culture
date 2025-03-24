@@ -5,6 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Events</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        .btn-back {
+            background-color: gray;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        .btn-back:hover {
+            background-color: darkgray;
+        }
+    </style>
 </head>
 <body>
 
@@ -37,6 +54,9 @@
         {% endif %}
 
     </div>
+
+    <!-- Back Button at Bottom Center -->
+    <button onclick="window.location.href='{% url 'admin_dashboard' %}'" class="btn-back">Back</button>
 
 </body>
 </html>

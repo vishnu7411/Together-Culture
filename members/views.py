@@ -39,12 +39,12 @@ def user_login(request):
         else:
             messages.error(request, "Invalid username or password!")
 
-    return render(request, "members/login.html")  # Ensure the login template exists
+    return render(request, "login.html")  # Ensure the login template exists
 
 def manage_events(request):
     """View to display all ongoing events"""
     events = OngoingEvent.objects.all()
-    return render(request, 'members/ongoing_events.html', {'events': events})
+    return render(request, 'manage_events.html', {'events': events})
 
 def add_ongoing_event(request):
     """View to add a new ongoing event"""
@@ -52,10 +52,10 @@ def add_ongoing_event(request):
         form = OngoingEventForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('ongoing_events')
+            return redirect('manage_events')
     else:
         form = OngoingEventForm()
-    return render(request, 'members/add_ongoing_event.html', {'form': form})
+    return render(request, 'add_event.html', {'form': form})
     return render(request, "login.html")  # Ensure the login template exists
 
 

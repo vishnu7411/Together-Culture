@@ -8,7 +8,6 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            text-align: center;
             margin: 0;
             padding: 0;
         }
@@ -24,6 +23,7 @@
             font-size: 28px;
             color: #333;
             margin-bottom: 20px;
+            text-align: center;
         }
         table {
             width: 100%;
@@ -46,9 +46,27 @@
         tr:hover {
             background: #f1f1f1;
         }
+        .btn-back {
+            background-color: gray;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .btn-back:hover {
+            background-color: darkgray;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Back Button -->
+    <button onclick="window.location.href='{% url 'admin_dashboard' %}'" class="btn-back">Back</button>
+
     <div class="container">
         <h2>Registered Members</h2>
         <table>
@@ -72,11 +90,12 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">No registered members found.</td>
+                    <td colspan="5" class="text-center">No registered members found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
 </body>
 </html>
