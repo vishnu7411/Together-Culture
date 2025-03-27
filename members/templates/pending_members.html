@@ -69,6 +69,7 @@
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Membership Type</th>
+                    <th>Interests</th> <!-- New column added -->
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -79,6 +80,7 @@
                     <td>{{ member.last_name }}</td>
                     <td>{{ member.email }}</td>
                     <td>{{ member.membership_type }}</td>
+                    <td>{{ member.interests }}</td> <!-- New field displayed -->
                     <td>
                         <form method="post" action="{% url 'approve_member' member.id %}" style="display:inline;">
                             {% csrf_token %}
@@ -92,7 +94,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5" class="text-center">No pending members.</td>
+                    <td colspan="6" class="text-center">No pending members.</td>
                 </tr>
                 {% endfor %}
             </tbody>

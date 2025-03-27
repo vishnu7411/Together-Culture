@@ -14,7 +14,7 @@
             padding: 0;
         }
         .container {
-            width: 80%;
+            width: 90%;
             margin: 20px auto;
             background: white;
             padding: 20px;
@@ -75,6 +75,7 @@
                     <th>Email</th>
                     <th>Membership Type</th>
                     <th>Gender</th>
+                    <th>Interests</th> <!-- Added Interests Column -->
                 </tr>
             </thead>
             <tbody>
@@ -85,10 +86,11 @@
                     <td>{{ member.email }}</td>
                     <td>{{ member.membership_type }}</td>
                     <td>{{ member.gender }}</td>
+                    <td>{{ member.interests|default:"Not specified" }}</td> <!-- Added Interest Data -->
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="5">No registered members found.</td>
+                    <td colspan="6">No registered members found.</td>
                 </tr>
                 {% endfor %}
             </tbody>
