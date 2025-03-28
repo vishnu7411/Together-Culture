@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Together Culture</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #ffffff;
+    }
+
+    /* Header */
+    .header {
+      background-color: #a8ecf7;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #007c99;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    .header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    /* Nav Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #5ba5b6;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px; /* Adds space between buttons */
+    }
+
+    .nav-btn {
+      background-color: white;
+      color: #000;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 5px;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .nav-icon {
+      font-size: 18px;
+      background-color: white;
+      border-radius: 50%;
+      padding: 4px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Events Section */
+    .events {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .events h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px; /* Space between cards */
+      flex-wrap: wrap;
+    }
+
+    .card {
+      width: 200px;
+      height: 300px;
+      background-color: #ddd;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 10px;
+      position: relative;
+      border-radius: 8px;
+    }
+
+    .card button {
+      background-color: #5ba5b6;
+      border: none;
+      padding: 8px 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .down-arrow {
+      font-size: 32px;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-left, .nav-right {
+        justify-content: center;
+      }
+
+      .cards {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Together Culture</h1>
+    <p>Connecting Creativity and Community</p>
+  </div>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <span class="nav-btn">&larr; Back</span>
+      <span class="nav-icon">👤</span>
+      <a class="nav-btn" href="#">Profile</a>
+      <a class="nav-btn" href="#">Membership Type</a>
+      <a class="nav-btn" href="#">My Events</a>
+      <a class="nav-btn" href="#">Become a Volunteer</a>
+      <a class="nav-btn" href="#">Reviews</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-btn" href="#">Logout</a>
+      <span class="nav-icon">💬</span>
+      <span class="nav-icon">🔔</span>
+      <span class="nav-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- Events Section -->
+  <div class="events">
+    <h2>Upcoming Events</h2>
+    <div class="cards">
+      <div class="card"><button>Join Now</button></div>
+      <div class="card"><button>Join Now</button></div>
+      <div class="card"><button>Join Now</button></div>
+    </div>
+  </div>
+
+  <div class="down-arrow">&#x2B07;</div>
+
+</body>
+</html>
