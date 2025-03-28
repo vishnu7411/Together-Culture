@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Become a Volunteer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+
+    /* Header */
+    .header {
+      background-color: #a8ecf7;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 2px solid #007c99;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    .header p {
+      margin: 5px 0 0;
+      font-size: 14px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #5ba5b6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .nav-btn {
+      background-color: white;
+      border: none;
+      padding: 6px 12px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      background-color: white;
+      padding: 5px;
+      border-radius: 50%;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .step {
+      margin-bottom: 30px;
+    }
+
+    .video-box {
+      width: 100%;
+      height: 180px;
+      background-color: #a66;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-box::before {
+      content: '▶️';
+      font-size: 30px;
+      color: white;
+    }
+
+    /* Form Styling */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    .submit-btn {
+      background-color: #00cfff;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .video-box {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>Together Culture</h1>
+    <p>Connecting Creativity and Community</p>
+  </div>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="nav-left">
+      <button class="nav-btn">&larr; Back</button>
+      <button class="nav-btn" style="background-color: #4d98ae; color: white;">Become a Volunteer</button>
+    </div>
+    <div class="nav-right">
+      <button class="nav-btn">Logout</button>
+      <span class="nav-icon">💬</span>
+      <span class="nav-icon">🔔</span>
+      <span class="nav-icon">🔍</span>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="container">
+    <h2>BECOME A VOLUNTEER</h2>
+    <p>To become a volunteer you should complete min 3 events</p>
+
+    <div class="step">
+      <strong>1. Step One: Watch Induction Video</strong>
+      <div class="video-box"></div>
+    </div>
+
+    <div class="step">
+      <strong>2. Step Two: Understand Volunteer Guidelines</strong>
+      <div class="video-box"></div>
+    </div>
+
+    <div class="step">
+      <strong>3. Step Three: Event Demo & Communication</strong>
+      <div class="video-box"></div>
+    </div>
+
+    <div class="step">
+      <strong>4. Volunteer Interest Form</strong>
+      <form>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label>Why do you want to become a volunteer?</label>
+          <textarea name="reason"></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
