@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'members'  # Registered the "members" app
+    'members'  ,# Registered the "members" app
+    'events'
 ]
 
 MIDDLEWARE = [
@@ -147,6 +148,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "members",  # ✅ Ensure your app is listed
+    'events'
 ]
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
