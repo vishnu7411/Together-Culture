@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Together Culture - Login</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin: 5px 0 0;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login Form */
+        .login-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .login-container h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .login-container .checkbox {
+            text-align: left;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .login-container .checkbox input {
+            margin-left: -175px;
+        }
+
+        .login-container .checkbox label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .login-container .forgot-password {
+            font-size: 0.9em;
+            color: #666;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+
+        .login-container .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .login-container button:hover {
+            background-color: #555;
+        }
+
+        .login-container .signup-link {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 20px;
+        }
+
+        .login-container .signup-link a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .login-container .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Together Culture</h1>
+        <p>Connecting Creativity and Community</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="home.html">Home</a>
+        <a href="Membership_details.html">Membership Details</a>
+        <a href="#">Events</a>
+        <a href="#">Careers</a>
+        <a href="#">About Us</a>
+        <a href="Login.html">Login</a>
+    </nav>
+
+    <!-- Login Form -->
+    <div class="login-container">
+        <h2>Welcome Back!</h2>
+        <input type="text" placeholder="Email or Username" required>
+        <input type="password" placeholder="Password" required>
+        <div class="checkbox">
+            <input type="checkbox" id="keep-signed-in">
+            <label for="keep-signed-in">Keep me signed in</label>
+        </div>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <button>Login</button>
+        <p class="signup-link">Don't have an account? <a href="#">Sign Up</a></p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms</a> | 
+        <a href="#">Help Center</a>
+        <p>&copy; 2025 Together Culture</p>
+    </footer>
+</body>
+</html>

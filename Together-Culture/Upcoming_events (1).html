@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Together Culture - Events</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header and Navigation */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Main Content - Events Section */
+        .events-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .events-container h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .add-event-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .add-event-button:hover {
+            background-color: #45a049; /* Darker green */
+        }
+
+        .event-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .event-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .event-box p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .event-box .location {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .event-box .capacity {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Together Culture</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="Admin_members.html">Members</a>
+        <a href="Admin_approve.html">Pending Member Approval</a>
+        <a href="events.html">Upcoming Events</a>
+        <a href="#">Ongoing Events</a>
+        <a href="#">Add New Events</a>
+        <a href="#">Logout</a>
+    </nav>
+
+    <!-- Main Content - Events Section -->
+    <section class="events-container">
+        <h2>Upcoming Events</h2>
+
+        <!-- Add New Event Button -->
+        <button class="add-event-button" onclick="window.location.href='add-event.html'">Add New Event</button>
+
+        <!-- Event 1 -->
+        <div class="event-box">
+            <h3>Caring Events</h3>
+            <p class="location">Location: School</p>
+            <p class="capacity">Capacity: 50</p>
+            <p>Event Description: Members come together to plant, maintain, or harvest a community garden, promoting sustainability and teamwork.</p>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-box">
+            <h3>Sharing Events</h3>
+            <p class="location">Location: Park</p>
+            <p class="capacity">Capacity: 20</p>
+            <p>Event Description: Members share their skills (e.g., cooking, coding, painting) in small group sessions.</p>
+        </div>
+
+        <!-- Event 3 -->
+        <!--<div class="event-box">
+            <h3>Working Events</h3>
+            <p class="location">Location: Beach</p>
+            <p class="capacity">Capacity: 30</p>
+            <p>Event Description: Dedicated days for members to work together in a shared space, fostering collaboration and productivity.</p>
+        </div>-->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="#">Privacy Policy</a> | 
+        <a href="#">Terms of Service</a> | 
+        <a href="#">Social Media</a>
+    </footer>
+</body>
+</html>
