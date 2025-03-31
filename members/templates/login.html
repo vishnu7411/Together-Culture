@@ -85,25 +85,12 @@
             margin-bottom: 15px;
         }
 
-        /* Forgot Password */
-        .forgot-password {
-            display: block;
-            margin-top: 15px;
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .forgot-password:hover {
-            text-decoration: underline;
-        }
-
         /* Back to Home Button */
         .back-btn {
             display: block;
             text-align: center;
             margin-top: 15px;
-            color: white;
+            color: black;
             font-size: 1em;
             text-decoration: none;
             font-weight: bold;
@@ -158,7 +145,6 @@
             <button type="submit" class="login-btn">Login</button>
         </form>
 
-        <a href="{% url 'password_reset' %}" class="forgot-password">Forgot Password?</a>
         <a href="{% url 'home' %}" class="back-btn">← Back to Home</a>
     </div>
 

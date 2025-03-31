@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Member Dashboard - Together Culture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #1e3c72;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background-color: #2a5298;
+            padding: 10px 0;
+        }
+
+        nav a {
+            margin: 5px 10px;
+            padding: 10px 20px;
+            background: white;
+            color: #1e3c72;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            background-color: #ffcc00;
+        }
+
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f4f4f4;
+            min-height: 80vh;
+            color: #333;
+        }
+
+        .container h2 {
+            color: #1e3c72;
+        }
+
+        .event-card {
+            background-color: white;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .event-card h3 {
+            margin-top: 0;
+            color: #1e3c72;
+        }
+
+        .event-card p {
+            margin: 5px 0;
+        }
+
+        .footer {
+            background-color: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Together Culture</h1>
+    <p>Connecting Creativity and Community</p>
+</header>
+
+<nav>
+    <a href="{% url 'home' %}">← Back</a>
+    <a href="#">Profile</a>
+    <a href="#">Membership Type</a>
+    <a href="#">My Events</a>
+    <a href="#">Become a Volunteer</a>
+    <a href="#">Reviews</a>
+    <a href="{% url 'logout' %}">Logout</a>
+
+</nav>
+
+<div class="container">
+    <h2>Welcome, {{ member.first_name }}!</h2>
+
+    <h3>Upcoming Events</h3>
+
+    {% if events %}
+        {% for event in events %}
+            <div class="event-card">
+                <h3>{{ event.name }}</h3>
+                <p><strong>Type:</strong> {{ event.event_type }}</p>
+                <p><strong>Date:</strong> {{ event.event_date }}</p>
+                <p><strong>Time:</strong> {{ event.event_time }}</p>
+                <p><strong>Location:</strong> {{ event.location }}</p>
+                <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No upcoming events at the moment.</p>
+    {% endif %}
+</div>
+
+<div class="footer">
+    &copy; 2025 Together Culture | All Rights Reserved
+</div>
+
+</body>
+</html>

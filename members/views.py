@@ -155,3 +155,48 @@ def add_ongoing_event(request):
     else:
         form = OngoingEventForm()
     return render(request, 'add_event.html', {'form': form})
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Member
+
+def user_login(request):
+    if request.method == 'POST':
+        email_or_username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        try:
+            member = Member.objects.get(email=email_or_username)
+
+            if member.password == password:  # In production, hash passwords!
+                # Optional: You can set session or context
+                request.session['member_id'] = member.id
+                messages.success(request, f"Welcome, {member.first_name}!")
+                return redirect('member_dashboard')  # URL name for your member_dashboard view
+            else:
+                messages.error(request, "Invalid password.")
+        except Member.DoesNotExist:
+            messages.error(request, "User not found.")
+
+    return render(request, 'login.html')
+
+
+from django.shortcuts import render, redirect
+from .models import Member
+
+def member_dashboard(request):
+    member_id = request.session.get('member_id')
+    if not member_id:
+        return redirect('user_login')  # Ensure user is logged in
+
+    member = Member.objects.get(id=member_id)
+    return render(request, 'member_dashboard.html', {'member': member})
+
+
+from django.contrib.auth import logout
+
+def member_logout(request):
+    logout(request)
+    request.session.flush()  # Clear session
+    list(messages.get_messages(request))
+    return redirect('home')  # Redirect to home or login

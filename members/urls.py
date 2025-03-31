@@ -7,6 +7,8 @@ from .views import pending_members, approve_member, reject_member
 from .views import add_event, manage_events
 from .views import events_page
 from django.contrib.auth import views as auth_views
+from django.urls import path
+from . import views
 
 urlpatterns = [
     path("", home, name="home"),  # Home page
@@ -28,6 +30,12 @@ urlpatterns = [
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
+    path('login/', views.user_login, name='user_login'),
+    path('member-dashboard/', views.member_dashboard, name='member_dashboard'),
+    path('logout/', views.member_logout, name='logout')
+
 
 
 ]
+
+
