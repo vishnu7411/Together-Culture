@@ -8,6 +8,12 @@ from django.contrib.auth.forms import PasswordResetForm
 from .models import Member, Event
 from .forms import MemberForm
 
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .models import Member
+
 def register(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -18,19 +24,31 @@ def register(request):
         interests = request.POST.get('interests', '')
         membership_type = request.POST.get('membership_type', '')
 
-        if Member.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             messages.error(request, 'Email already exists.')
         else:
+            # ✅ Step 1: Create Django User
+            username = email.split('@')[0]
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.first_name = first_name
+            user.last_name = last_name
+            user.save()
+
+            # ✅ Step 2: Create Member linked to User
             Member.objects.create(
+                user=user,  # <- 🔥 THIS is what was missing!
                 first_name=first_name,
                 last_name=last_name,
                 gender=gender,
                 email=email,
-                password=password,
                 interests=interests,
                 membership_type=membership_type
             )
+
+            # ✅ Step 3: Log in and redirect
+            login(request, user)
             messages.success(request, 'Registration successful!')
+            return redirect('register')
 
     return render(request, 'new_member.html')
 
