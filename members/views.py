@@ -55,20 +55,48 @@ def register(request):
 def home(request):
     return render(request, "home.html")
 
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .models import Member
+
 def user_login(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
+    if request.method == 'POST':
+        email_or_username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        # Allow login via email
+        try:
+            user = User.objects.get(email=email_or_username)
+        except User.DoesNotExist:
+            messages.error(request, "No account found with that email.")
+            return render(request, 'login.html')
+
+        # Authenticate securely
+        user = authenticate(request, username=user.username, password=password)
 
         if user is not None:
-            login(request, user)
-            messages.success(request, "Login successful!")
-            return redirect("home")
-        else:
-            messages.error(request, "Invalid username or password!")
+            try:
+                # Get linked Member
+                member = Member.objects.get(email=user.email)
 
-    return render(request, "login.html")
+                if not member.is_approved:
+                    messages.error(request, "Admin approval is required before you can login. Please try again later.")
+                    return render(request, 'login.html')
+
+                # If approved, login user
+                login(request, user)
+                messages.success(request, f"Welcome, {member.first_name}!")
+                return redirect('member_dashboard')
+
+            except Member.DoesNotExist:
+                messages.error(request, "Your user account has no member profile.")
+        else:
+            messages.error(request, "Incorrect password.")
+
+    return render(request, 'login.html')
+
 
 def manage_events(request):
     events = Event.objects.all()
@@ -175,45 +203,6 @@ def add_ongoing_event(request):
     return render(request, 'add_event.html', {'form': form})
 
 from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from .models import Member
-
-def user_login(request):
-    if request.method == 'POST':
-        email_or_username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        try:
-            # Get user from User model based on email
-            user = User.objects.get(email=email_or_username)
-        except User.DoesNotExist:
-            messages.error(request, "No user with that email.")
-            return render(request, 'login.html')
-
-        # Authenticate using username (not email)
-        user = authenticate(request, username=user.username, password=password)
-
-        if user is not None:
-            login(request, user)
-
-            try:
-                # Now get matching member
-                member = Member.objects.get(email=user.email)
-                request.session['member_id'] = member.id
-                messages.success(request, f"Welcome, {member.first_name}!")
-            except Member.DoesNotExist:
-                messages.warning(request, "User logged in, but member profile not found.")
-
-            return redirect('member_dashboard')
-        else:
-            messages.error(request, "Incorrect password.")
-
-    return render(request, 'login.html')
-
-
-from django.shortcuts import render, redirect
 from .models import Member
 
 def member_dashboard(request):
@@ -248,3 +237,60 @@ def member_dashboard(request):
         'events': events,
     })
 
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from .models import Member
+
+def approve_member(request, member_id):
+    member = get_object_or_404(Member, id=member_id)
+    member.is_approved = True
+    member.save()
+
+    # ✅ Send approval email
+    subject = 'Your Together Culture account has been approved!'
+    message = f"""
+    Hi {member.first_name},
+
+    🎉 Great news! Your Together Culture account has been approved by the admin.
+
+    You can now log in and start exploring events, spaces, and the community.
+
+    👉 Login here: http://127.0.0.1:8000/login/
+
+    See you inside!
+    - Together Culture Team
+    """
+    send_mail(subject, message, 'vivekvardhan378@gmail.com', [member.email], fail_silently=False)
+
+    messages.success(request, f"{member.first_name}'s account has been approved and notified via email.")
+    return redirect("pending_members")
+
+
+from django.core.mail import send_mail
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, redirect
+from .models import Member
+
+def reject_member(request, member_id):
+    member = get_object_or_404(Member, id=member_id)
+
+    # ✅ Send rejection email
+    subject = 'Update on Your Together Culture Membership'
+    message = f"""
+    Hi {member.first_name},
+
+    Thank you for your interest in joining Together Culture. 
+    Unfortunately, your membership request was not approved at this time.
+
+    If you believe this was a mistake or would like to reapply in the future, feel free to reach out.
+
+    We appreciate your enthusiasm and wish you all the best.
+
+    - Together Culture Team
+    """
+    send_mail(subject, message, 'vivekvardhan378@gmail.com', [member.email], fail_silently=False)
+
+    member.delete()
+    messages.success(request, f"{member.first_name}'s membership was rejected and notified via email.")
+    return redirect("pending_members")

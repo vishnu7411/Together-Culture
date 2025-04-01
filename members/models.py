@@ -84,17 +84,4 @@ class Member(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-from django.contrib.auth.models import User
-
-class Member(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # 🔥 Add this line
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    email = models.EmailField()
-    gender = models.CharField(max_length=10)
-    membership_type = models.CharField(max_length=100)
-    interests = models.CharField(max_length=200)
-    is_approved = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+is_approved = models.BooleanField(default=False)
