@@ -158,6 +158,8 @@ def add_ongoing_event(request):
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from .models import Member
 
 def user_login(request):
@@ -166,17 +168,29 @@ def user_login(request):
         password = request.POST.get('password')
 
         try:
-            member = Member.objects.get(email=email_or_username)
+            # Get user from User model based on email
+            user = User.objects.get(email=email_or_username)
+        except User.DoesNotExist:
+            messages.error(request, "No user with that email.")
+            return render(request, 'login.html')
 
-            if member.password == password:  # In production, hash passwords!
-                # Optional: You can set session or context
+        # Authenticate using username (not email)
+        user = authenticate(request, username=user.username, password=password)
+
+        if user is not None:
+            login(request, user)
+
+            try:
+                # Now get matching member
+                member = Member.objects.get(email=user.email)
                 request.session['member_id'] = member.id
                 messages.success(request, f"Welcome, {member.first_name}!")
-                return redirect('member_dashboard')  # URL name for your member_dashboard view
-            else:
-                messages.error(request, "Invalid password.")
-        except Member.DoesNotExist:
-            messages.error(request, "User not found.")
+            except Member.DoesNotExist:
+                messages.warning(request, "User logged in, but member profile not found.")
+
+            return redirect('member_dashboard')
+        else:
+            messages.error(request, "Incorrect password.")
 
     return render(request, 'login.html')
 
@@ -200,3 +214,19 @@ def member_logout(request):
     request.session.flush()  # Clear session
     list(messages.get_messages(request))
     return redirect('home')  # Redirect to home or login
+
+from django.shortcuts import render
+from .models import Event, Member
+
+def member_dashboard(request):
+    # ✅ Match member by email
+    member = Member.objects.get(email=request.user.email)
+
+    # ✅ Get events
+    events = Event.objects.all().order_by('event_date', 'event_time')
+
+    return render(request, 'member_dashboard.html', {
+        'member': member,
+        'events': events,
+    })
+

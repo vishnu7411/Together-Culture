@@ -108,7 +108,8 @@
 </nav>
 
 <div class="container">
-    <h2>Welcome, {{ member.first_name }}!</h2>
+    <h2>Welcome, {{ member.first_name|capfirst }} {{ member.last_name|capfirst }}!</h2>
+
 
     <h3>Upcoming Events</h3>
 
