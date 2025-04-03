@@ -85,3 +85,12 @@ class Member(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 is_approved = models.BooleanField(default=False)
+
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    text = models.TextField()
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Review by {self.user.username} on {self.event.name}"

@@ -230,7 +230,7 @@ def member_dashboard(request):
     member = Member.objects.get(email=request.user.email)
 
     # ✅ Get events
-    events = Event.objects.all().order_by('event_date', 'event_time')
+    events = Event.objects.filter(event_date__gte=date.today()).order_by('event_date', 'event_time')
 
     return render(request, 'member_dashboard.html', {
         'member': member,
@@ -294,3 +294,51 @@ def reject_member(request, member_id):
     member.delete()
     messages.success(request, f"{member.first_name}'s membership was rejected and notified via email.")
     return redirect("pending_members")
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from .models import Event, Review
+from datetime import date
+
+
+@login_required
+def submit_review(request):
+    user = request.user
+    completed_events = Event.objects.filter(event_date__lt=timezone.now().date()).order_by('-event_date')
+
+    user_reviews = {}
+    other_reviews = {}
+
+    if request.method == 'POST':
+        for event in completed_events:
+            review_key = f'review_{event.id}'
+            review_text = request.POST.get(review_key)
+
+            if review_text:
+                review, created = Review.objects.get_or_create(user=user, event=event)
+                review.text = review_text
+                review.save()
+
+        return redirect('submit_review')
+
+    for event in completed_events:
+        # Logged-in user's review
+        user_review = Review.objects.filter(event=event, user=user).first()
+        user_reviews[event.id] = user_review
+
+        # Other users' reviews
+        others = Review.objects.filter(event=event).exclude(user=user)
+        other_reviews[event.id] = others
+
+    return render(request, 'submit_review.html', {
+        'events': completed_events,
+        'user_reviews': user_reviews,
+        'other_reviews': other_reviews,
+    })
+
+
+from django.shortcuts import render
+
+def submit_review_success(request):
+    return render(request, 'submit_review_success.html')

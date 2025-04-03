@@ -1,0 +1,148 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Review - Together Culture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: white;
+        }
+        header {
+            background-color: #1e3c72;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #2a5298;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        nav a {
+            background: white;
+            color: #1e3c72;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #ffcc00;
+        }
+        .container {
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 40px 20px;
+            min-height: 80vh;
+            text-align: center;
+        }
+        .review-box {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+        .past-review {
+            background-color: #e6f2ff;
+            padding: 10px;
+            border-left: 4px solid #1e3c72;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: left;
+        }
+        .submit-btn {
+            background-color: #1e3c72;
+            color: white;
+            padding: 10px 25px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background-color: #ffcc00;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Together Culture</h1>
+    <p>Connecting Creativity and Community</p>
+</header>
+
+<nav>
+    <a href="{% url 'member_dashboard' %}">← Back</a>
+    <a href="{% url 'login' %}">Logout</a>
+</nav>
+
+<div class="container">
+    <h2>Review Completed Events</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for event in events %}
+            <div class="review-box">
+                <h3>{{ event.name }} ({{ event.event_date }})</h3>
+
+                {% with user_reviews|get_item:event.id as user_review %}
+                    {% if user_review %}
+                        <div class="past-review">
+                            <strong>Your Review:</strong><br>
+                            <textarea name="review_{{ event.id }}">{{ user_review.text }}</textarea>
+                        </div>
+                    {% else %}
+                        <textarea name="review_{{ event.id }}" placeholder="Write your review..."></textarea>
+                    {% endif %}
+                {% endwith %}
+
+                {% with other_reviews|get_item:event.id as others %}
+                    {% if others %}
+                        <div class="past-review">
+                            <strong>Other Reviews:</strong>
+                            <ul>
+                                {% for review in others %}
+                                    <li>
+                                        <strong>
+                                            {% if review.user.first_name or review.user.last_name %}
+                                                {{ review.user.first_name }} {{ review.user.last_name }}
+                                            {% else %}
+                                                {{ review.user.username }}
+                                            {% endif %}
+                                        </strong>: {{ review.text }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        {% empty %}
+            <p>No completed events to review.</p>
+        {% endfor %}
+        {% if events %}
+            <button type="submit" class="submit-btn">Submit Reviews</button>
+        {% endif %}
+    </form>
+</div>
+
+</body>
+</html>

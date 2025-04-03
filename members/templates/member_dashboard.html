@@ -102,14 +102,13 @@
     <a href="#">Membership Type</a>
     <a href="#">My Events</a>
     <a href="#">Become a Volunteer</a>
-    <a href="#">Reviews</a>
+    <a href="{% url 'submit_review' %}">Reviews</a>
     <a href="{% url 'logout' %}">Logout</a>
 
 </nav>
 
 <div class="container">
-    <h2>Welcome, {{ member.first_name|capfirst }} {{ member.last_name|capfirst }}!</h2>
-
+    <h2>Welcome, {{ member.first_name }}!</h2>
 
     <h3>Upcoming Events</h3>
 
