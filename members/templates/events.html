@@ -76,7 +76,6 @@
     <!-- Navbar -->
     <nav class="navbar navbar-dark">
         <a class="navbar-brand" href="#">Together Culture</a>
-        <a href="{% url 'add_event' %}" class="btn btn-primary">Add Event</a>
     </nav>
 
     <div class="container">
@@ -99,9 +98,6 @@
             {% endfor %}
         {% else %}
             <p class="text-center">No events added.</p>
-            <div class="text-center mt-3">
-                <a href="{% url 'add_event' %}" class="btn btn-success">Add Event</a>
-            </div>
         {% endif %}
     </div>
 
