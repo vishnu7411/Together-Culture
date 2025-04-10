@@ -12,3 +12,11 @@ class MemberAdmin(admin.ModelAdmin):
 admin.site.site_header = "Together Culture Admin"
 admin.site.site_title = "Together Culture Admin Panel"
 admin.site.index_title = "Welcome to Together Culture Admin"
+
+# events/admin.py
+from django.contrib import admin
+from .models import Event
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+    list_display = ('name', 'event_type', 'location', 'capacity', 'event_date', 'event_time')

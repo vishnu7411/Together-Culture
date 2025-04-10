@@ -320,7 +320,7 @@ def submit_review(request):
                 review.text = review_text
                 review.save()
 
-        return redirect('submit_review')
+        return redirect('submit_review_success')
 
     for event in completed_events:
         # Logged-in user's review
@@ -342,3 +342,64 @@ from django.shortcuts import render
 
 def submit_review_success(request):
     return render(request, 'submit_review_success.html')
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Member  # adjust if your Member model is elsewhere
+
+@login_required
+def membership_type_view(request):
+    member = request.user.member  # assumes a OneToOne relationship with User
+
+    if request.method == 'POST':
+        new_type = request.POST.get('membership_type')
+        if new_type:
+            member.membership_type = new_type
+            member.save()
+        return redirect('membership-type')
+
+    return render(request, 'membership_type.html', {'member': member})
+
+from django.contrib import messages
+from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
+from .forms import MemberForm
+
+@login_required
+def edit_member_profile(request):
+    member = request.user.member
+    if request.method == 'POST':
+        form = MemberForm(request.POST, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect('member_dashboard')  # redirect to member dashboard
+    else:
+        form = MemberForm(instance=member)
+
+    return render(request, 'myprofile.html', {'form': form, 'member': member, 'edit_mode': True})
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+
+@login_required
+def member_profile(request):
+    member = request.user.member
+    return render(request, 'myprofile.html', {'member': member, 'edit_mode': False})
+
+@login_required
+def membership_type_view(request):
+    member = request.user.member  # Assuming OneToOne relation with User
+
+    if request.method == 'POST':
+        new_type = request.POST.get('membership_type')
+        if new_type:
+            member.membership_type = new_type
+            member.save()
+            return redirect('member_dashboard')  # or reload page with success message
+
+    return render(request, 'membership_type.html', {
+        'current_type': member.membership_type
+    })

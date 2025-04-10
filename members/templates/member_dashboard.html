@@ -98,8 +98,8 @@
 
 <nav>
     <a href="{% url 'home' %}">← Back</a>
-    <a href="#">Profile</a>
-    <a href="#">Membership Type</a>
+    <<a href="{% url 'member_profile' %}" class="btn btn-primary">Profile</a>
+    <a href="{% url 'membership_type' %}" class="btn btn-primary">Membership Type</a>
     <a href="#">My Events</a>
     <a href="#">Become a Volunteer</a>
     <a href="{% url 'submit_review' %}">Reviews</a>

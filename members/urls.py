@@ -9,6 +9,9 @@ from .views import events_page
 from django.contrib.auth import views as auth_views
 from django.urls import path
 from . import views
+from django.urls import path
+from members import views
+
 
 urlpatterns = [
     path("", home, name="home"),  # Home page
@@ -34,7 +37,13 @@ urlpatterns = [
     path('member-dashboard/', views.member_dashboard, name='member_dashboard'),
     path('logout/', views.member_logout, name='logout'),
     path('submit-review/', views.submit_review, name='submit_review'),
-    path('submit-review/success/', views.submit_review_success, name='submit_review_success')
+    path('submit-review/success/', views.submit_review_success, name='submit_review_success'),
+    path('membership-type/', views.membership_type_view, name='membership-type'),
+    path('profile/', views.member_profile, name='member_profile'),
+    path('profile/edit/', views.edit_member_profile, name='edit_member_profile'),
+    path('member-dashboard/', views.member_dashboard, name='member_dashboard'),
+    path('membership-type/', views.membership_type_view, name='membership_type')
+
 
 
 

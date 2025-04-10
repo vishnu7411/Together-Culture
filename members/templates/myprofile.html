@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - Together Culture</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .top-bar {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .back-btn {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 40px auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-edit {
+            background-color: #f0ad4e;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-edit:hover {
+            background-color: #ec971f;
+        }
+
+        .profile-heading {
+            color: #003366;
+            font-weight: bold;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="{% url 'member_dashboard' %}" class="back-btn">← Back</a>
+</div>
+
+<div class="profile-container">
+    <div class="text-center profile-heading mb-4">Profile Information</div>
+
+    {% if edit_mode %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success">Save</button>
+            <a href="{% url 'member_profile' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    {% else %}
+        <p><strong>Name:</strong> {{ member.first_name }} {{ member.last_name }}</p>
+        <p><strong>Gender:</strong> {{ member.gender }}</p>
+        <p><strong>Email Address:</strong> {{ member.email }}</p>
+        <p><strong>Interests:</strong> {{ member.interests }}</p>
+        <p><strong>Membership Type:</strong> {{ member.membership_type }}</p>
+
+        <a href="{% url 'edit_member_profile' %}" class="btn btn-edit mt-3">Edit Profile</a>
+    {% endif %}
+</div>
+
+</body>
+</html>

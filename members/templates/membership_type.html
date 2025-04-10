@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Custom Blue Header -->
+<div style="background-color: #123c7b; padding: 1rem;">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="{% url 'member_dashboard' %}" class="btn btn-light">← Back</a>
+        <h4 class="text-white m-0">Together Culture</h4>
+        <div></div>  <!-- Empty spacer -->
+    </div>
+</div>
+
+<!-- Main Card -->
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card shadow p-4 w-50">
+        <h3 class="text-center mb-4">Your Membership Type</h3>
+
+        <p class="text-center">
+            <strong>Current Type:</strong> {{ current_type|default:"Not set" }}
+        </p>
+
+        <form method="post" class="text-center">
+            {% csrf_token %}
+            <label for="membership_type">Change Membership Type:</label>
+            <select name="membership_type" class="form-control w-50 mx-auto my-2" required>
+                <option value="">--Select--</option>
+                <option value="Key Access">Key Access</option>
+                <option value="Creative Workspace">Creative Workspace</option>
+                <option value="Community Member">Community Member</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-2">Update</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
